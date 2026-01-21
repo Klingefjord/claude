@@ -1,0 +1,52 @@
+# OAuth credentials and tokens (NEVER commit these!)
+credentials.json
+token_*.json
+
+# Output directories
+receipts/matched/*
+receipts/manual_review/*
+!receipts/matched/.gitkeep
+!receipts/manual_review/.gitkeep
+
+# Logs and reports
+*.log
+receipt_finder_report.json
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environment
+venv/
+env/
+ENV/
+.venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
