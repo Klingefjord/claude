@@ -1,0 +1,56 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id             String    @id @default(cuid())
+  telegramChatId BigInt    @unique
+  readwiseToken  String?
+  lastSyncedAt   DateTime?
+  pendingQuizId  String?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  highlights Highlight[]
+  quizzes    Quiz[]
+}
+
+model Highlight {
+  id         String   @id @default(cuid())
+  readwiseId Int      @unique
+  text       String
+  note       String?
+  bookTitle  String
+  bookAuthor String?
+  sourceUrl  String?
+  userId     String
+  createdAt  DateTime @default(now())
+
+  user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  quizzes Quiz[]
+
+  @@index([userId])
+}
+
+model Quiz {
+  id            String    @id @default(cuid())
+  userId        String
+  highlightId   String
+  question      String
+  options       Json
+  correctAnswer String
+  userAnswer    String?
+  correct       Boolean?
+  sentAt        DateTime  @default(now())
+  answeredAt    DateTime?
+
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  highlight Highlight @relation(fields: [highlightId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}

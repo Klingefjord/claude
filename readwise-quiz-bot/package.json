@@ -1,0 +1,38 @@
+{
+  "name": "readwise-quiz-bot",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "react-router build",
+    "dev": "react-router dev",
+    "start": "react-router-serve ./build/server/index.js",
+    "typecheck": "react-router typegen && tsc"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.82.0",
+    "@neondatabase/serverless": "^1.0.2",
+    "@prisma/adapter-neon": "^7.6.0",
+    "@prisma/client": "^7.6.0",
+    "@react-router/node": "7.13.2",
+    "@react-router/serve": "7.13.2",
+    "@vercel/react-router": "^1.2.6",
+    "dotenv": "^17.4.0",
+    "grammy": "^1.41.1",
+    "isbot": "^5.1.36",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "react-router": "7.13.2"
+  },
+  "devDependencies": {
+    "@react-router/dev": "7.13.2",
+    "@tailwindcss/vite": "^4.2.2",
+    "@types/node": "^22",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "prisma": "^7.6.0",
+    "tailwindcss": "^4.2.2",
+    "typescript": "^5.9.3",
+    "vite": "^7.1.7",
+    "vite-tsconfig-paths": "^5.1.4"
+  }
+}

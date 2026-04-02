@@ -1,0 +1,8 @@
+{
+  "crons": [
+    {
+      "path": "/api/cron/daily-quiz",
+      "schedule": "0 9 * * *"
+    }
+  ]
+}
