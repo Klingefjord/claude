@@ -1,0 +1,179 @@
+# Venue archetypes — each entry maps a target market to OSM tag queries
+# and French keywords. Tier weights live in config.py.
+#
+# osm_filters: list of Overpass selector chains. Each item is the literal
+#   bracket sequence that goes between `nwr` and `(bbox);`. Multiple
+#   selectors in one item are AND'd; multiple items are OR'd.
+# keywords: French terms used by LLM scoring + future scrapers.
+
+archetypes:
+
+  # ---------- Tier A — direct fit ----------
+
+  accrobranche:
+    tier: A
+    label: "Parcours acrobatique en hauteur / accrobranche"
+    osm_filters:
+      - '["leisure"="adventure_park"]'
+      - '["sport"="climbing_adventure"]'
+    keywords: [accrobranche, parc aventure, parcours acrobatique, tyrolienne]
+
+  camping:
+    tier: A
+    label: "Camping (familial, 3+ étoiles)"
+    osm_filters:
+      - '["tourism"="camp_site"]'
+      - '["tourism"="caravan_site"]'
+    keywords: [camping, club enfants, familial, emplacement ombragé]
+
+  leisure_park:
+    tier: A
+    label: "Base de loisirs / parc de loisirs"
+    osm_filters:
+      - '["tourism"="theme_park"]'
+      - '["leisure"="water_park"]'
+      - '["leisure"="park"]["operator:type"="private"]'
+    keywords: [base de loisirs, parc de loisirs, loisirs plein air]
+
+  treehouse_hotel:
+    tier: A
+    label: "Cabanes dans les arbres / éco-resort / glamping"
+    osm_filters:
+      - '["tourism"="chalet"]'
+      - '["tourism"="wilderness_hut"]'
+      - '["tourism"="hotel"]["name"~"cabane|perchée|insolite",i]'
+    keywords: [cabane dans les arbres, écolodge, glamping, insolite, cabane perchée]
+
+  childrens_center:
+    tier: A
+    label: "Centre d'aventure / aire de jeux indoor-outdoor"
+    osm_filters:
+      - '["leisure"="trampoline_park"]'
+      - '["leisure"="playground"]["access"="customers"]'
+    keywords: [aire de jeux, parc enfants, centre aventure, kids]
+
+  # ---------- Tier B — philosophical fit ----------
+
+  waldorf_school:
+    tier: B
+    label: "École Steiner-Waldorf"
+    osm_filters:
+      - '["amenity"="school"]["pedagogy"="waldorf"]'
+      - '["amenity"="school"]["name"~"Steiner|Waldorf",i]'
+    keywords: [Steiner, Waldorf, pédagogie alternative]
+
+  forest_school:
+    tier: B
+    label: "École dans la nature / forest school"
+    osm_filters:
+      - '["amenity"="school"]["school:type"="forest"]'
+      - '["amenity"="school"]["name"~"forêt|nature|plein air",i]'
+    keywords: [école dans la nature, forest school, pédagogie nature]
+
+  montessori_school:
+    tier: B
+    label: "École Montessori"
+    osm_filters:
+      - '["amenity"="school"]["pedagogy"="montessori"]'
+      - '["amenity"="school"]["name"~"Montessori",i]'
+    keywords: [Montessori, pédagogie alternative]
+
+  day_camp:
+    tier: B
+    label: "Centre de loisirs / centre aéré"
+    osm_filters:
+      - '["leisure"="summer_camp"]'
+      - '["amenity"="community_centre"]["community_centre"="youth"]'
+    keywords: [centre de loisirs, centre aéré, accueil de loisirs, ALSH]
+
+  scout_campsite:
+    tier: B
+    label: "Camp scout"
+    osm_filters:
+      - '["leisure"="summer_camp"]["scout"="yes"]'
+      - '["name"~"scout|éclaireur",i]["leisure"="camp_site"]'
+    keywords: [scouts, éclaireurs, SGDF, camp scout]
+
+  # ---------- Tier C — marketing-differentiator angle ----------
+
+  guinguette:
+    tier: C
+    label: "Guinguette / café-restaurant en plein air"
+    osm_filters:
+      - '["name"~"guinguette",i]'
+      - '["amenity"="restaurant"]["outdoor_seating"="yes"]["cuisine"~"french|regional",i]'
+    keywords: [guinguette, terrasse, bord de Marne, plein air]
+
+  agritourism:
+    tier: C
+    label: "Ferme pédagogique / agrotourisme"
+    osm_filters:
+      - '["tourism"="farm"]'
+      - '["amenity"="restaurant"]["restaurant"="farm"]'
+    keywords: [ferme pédagogique, agrotourisme, ferme auberge]
+
+  vineyard:
+    tier: C
+    label: "Domaine viticole avec accueil"
+    osm_filters:
+      - '["tourism"="winery"]'
+      - '["craft"="winery"]'
+    keywords: [domaine viticole, vignoble, dégustation famille]
+
+  garden_arboretum:
+    tier: C
+    label: "Jardin botanique / arboretum"
+    osm_filters:
+      - '["leisure"="garden"]["garden:type"="botanical"]'
+      - '["tourism"="attraction"]["name"~"arboretum",i]'
+    keywords: [jardin botanique, arboretum, parc paysager]
+
+  retreat:
+    tier: C
+    label: "Retraite yoga / wellness avec terrain"
+    osm_filters:
+      - '["amenity"="retreat"]'
+      - '["tourism"="hotel"]["name"~"yoga|retraite|wellness",i]'
+    keywords: [retraite yoga, wellness, séjour nature]
+
+  gite:
+    tier: C
+    label: "Gîte / chambre d'hôtes familial"
+    osm_filters:
+      - '["tourism"="guest_house"]'
+      - '["tourism"="chalet"]["name"~"gîte",i]'
+    keywords: [gîte, chambres d'hôtes, gîte rural, gîtes de France]
+
+  wedding_venue:
+    tier: C
+    label: "Domaine événementiel / lieu de mariage"
+    osm_filters:
+      - '["amenity"="events_venue"]'
+      - '["tourism"="hotel"]["name"~"domaine|château",i]'
+    keywords: [domaine, château, lieu de mariage, événementiel]
+
+  # ---------- Tier D — institutional ----------
+
+  zoo:
+    tier: D
+    label: "Zoo / parc animalier"
+    osm_filters:
+      - '["tourism"="zoo"]'
+      - '["tourism"="aquarium"]'
+    keywords: [zoo, parc animalier, parc zoologique]
+
+  open_air_museum:
+    tier: D
+    label: "Écomusée / musée de plein air"
+    osm_filters:
+      - '["tourism"="museum"]["museum"="open_air"]'
+      - '["tourism"="museum"]["name"~"écomusée|plein air",i]'
+    keywords: [écomusée, musée de plein air, patrimoine]
+
+  climbing_gym:
+    tier: D
+    label: "Salle d'escalade avec terrasse extérieure"
+    osm_filters:
+      - '["leisure"="sports_centre"]["sport"="climbing"]'
+      - '["sport"="bouldering"]'
+    keywords: [escalade, bloc, bouldering, Arkose, Vertical'Art]

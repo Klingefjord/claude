@@ -1,0 +1,16 @@
+data/raw/
+data/cache/
+data/*.jsonl
+data/*.csv
+data/report.json
+*.log
+
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+
+.DS_Store
+.vscode/
+.idea/
