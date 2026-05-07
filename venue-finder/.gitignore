@@ -1,0 +1,20 @@
+data/raw/
+data/cache/
+data/*.jsonl
+data/*.csv
+data/report.json
+*.log
+
+# Whitelist deliverable outputs
+!data/top_1000.csv
+!data/top_with_email.csv
+
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+
+.DS_Store
+.vscode/
+.idea/
